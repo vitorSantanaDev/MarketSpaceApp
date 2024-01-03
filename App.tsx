@@ -9,6 +9,7 @@ import {
 
 import { theme } from "@theme/index";
 import { Loading } from "@components/Loading";
+import { Routes } from "@routes/index";
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Karla_400Regular, Karla_700Bold });
@@ -20,7 +21,7 @@ export default function App() {
         backgroundColor="transparent"
         barStyle="dark-content"
       />
-      {fontsLoaded ? <></> : <Loading />}
+      {fontsLoaded ? <Routes /> : <Loading />}
     </ThemeProvider>
   );
 }
