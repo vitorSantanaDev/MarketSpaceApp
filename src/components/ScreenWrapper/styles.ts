@@ -1,6 +1,6 @@
 import { SafeAreaView, StatusBar } from "react-native";
 import styled from "styled-components/native";
-import { ScreenWrapperBgColorType } from "./types";
+import { ScreenWrapperBgColorType } from ".";
 
 interface IProps {
   backgroundColor: ScreenWrapperBgColorType;

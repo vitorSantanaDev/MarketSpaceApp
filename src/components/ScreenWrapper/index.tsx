@@ -4,26 +4,23 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
+  ScrollViewProps,
 } from "react-native";
+import { SafeAreaViewProps } from "react-native-safe-area-context";
 
-import { IScreenWrapperProps } from "./types";
+import { theme } from "@theme/index";
 
 import * as S from "./styles";
 
-import { theme } from "@theme/index";
-import { ReactNode } from "react";
-import { ScrollViewProps } from "react-native";
-import { SafeAreaViewProps } from "react-native-safe-area-context";
-
 export type ScreenWrapperBgColorType = keyof typeof theme.colors;
 
-export interface IScreenWrapperProps {
-  children: ReactNode;
+type IScreenWrapperProps = {
+  children: React.ReactNode;
   backgroundColor?: ScreenWrapperBgColorType;
   disableScrollView?: boolean;
   scrollViewProps?: ScrollViewProps;
   safeAreaViewProps?: SafeAreaViewProps;
-}
+};
 
 const ScreenWrapper = React.forwardRef(function ScreenWrapperComponent(
   {
