@@ -1,10 +1,8 @@
-import React, { Ref, useCallback } from "react";
+import React, { Ref } from "react";
 import {
-  Keyboard,
   ScrollView,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
   ScrollViewProps,
+  KeyboardAvoidingView,
 } from "react-native";
 import { SafeAreaViewProps } from "react-native-safe-area-context";
 
@@ -32,10 +30,6 @@ const ScreenWrapper = React.forwardRef(function ScreenWrapperComponent(
   }: IScreenWrapperProps,
   ref: Ref<ScrollView>
 ) {
-  const handleCloseKeyboard = useCallback(() => {
-    Keyboard.dismiss();
-  }, []);
-
   if (disableScrollView)
     return (
       <S.SafeArea backgroundColor={backgroundColor} {...safeAreaViewProps}>
@@ -51,14 +45,9 @@ const ScreenWrapper = React.forwardRef(function ScreenWrapperComponent(
         showsVerticalScrollIndicator={false}
         {...scrollViewProps}
       >
-        <TouchableWithoutFeedback
-          onPressOut={handleCloseKeyboard}
-          style={{ flex: 1 }}
-        >
-          <KeyboardAvoidingView behavior="height" style={{ flex: 1 }}>
-            {children}
-          </KeyboardAvoidingView>
-        </TouchableWithoutFeedback>
+        <KeyboardAvoidingView behavior="height" style={{ flex: 1 }}>
+          {children}
+        </KeyboardAvoidingView>
       </S.ScrollView>
     </S.SafeArea>
   );
