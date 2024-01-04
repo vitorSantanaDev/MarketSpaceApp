@@ -30,6 +30,8 @@ export const SignUpScreenStylesSheet = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 16,
+    marginBottom: 48,
+    marginTop: 32,
   },
   alreadyHaveAccount: {
     alignItems: "center",
