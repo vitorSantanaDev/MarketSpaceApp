@@ -25,6 +25,7 @@ export const SignInScreenStylesSheet = StyleSheet.create({
     backgroundColor: theme.colors.gray_6,
   },
   registerSection: {
+    flex: 1,
     paddingTop: 56,
     paddingBottom: 68,
     paddingHorizontal: 48,
