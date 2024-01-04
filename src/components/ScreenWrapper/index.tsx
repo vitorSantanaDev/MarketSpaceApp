@@ -45,7 +45,7 @@ const ScreenWrapper = React.forwardRef(function ScreenWrapperComponent(
         showsVerticalScrollIndicator={false}
         {...scrollViewProps}
       >
-        <KeyboardAvoidingView behavior="height" style={{ flex: 1 }}>
+        <KeyboardAvoidingView style={{ flex: 1 }}>
           {children}
         </KeyboardAvoidingView>
       </S.ScrollView>
