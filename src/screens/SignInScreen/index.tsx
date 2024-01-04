@@ -1,14 +1,19 @@
 import { Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { Button } from "@components/Button";
 import { ScreenWrapper } from "@components/ScreenWrapper";
 import { InputComponent } from "@components/InputComponent";
+
+import { AuthNavigatorRoutesProps } from "@routes/auth.routes";
 
 import Logo from "@assets/logo_with_name.svg";
 
 import * as S from "./styles";
 
 export function SignInScreen() {
+  const navigation = useNavigation<AuthNavigatorRoutesProps>();
+
   return (
     <ScreenWrapper scrollViewProps={{ bounces: false }}>
       <View style={S.SignInScreenStylesSheet.container}>
@@ -39,6 +44,7 @@ export function SignInScreen() {
             bgColor="gray_5"
             label="Cadastre-se"
             labelStyle={{ color: "gray_2" }}
+            onPress={() => navigation.navigate("SIGN_UP")}
           />
         </View>
       </View>
