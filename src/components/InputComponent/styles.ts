@@ -19,4 +19,12 @@ export const InputComponentStylesSheet = StyleSheet.create({
     fontSize: theme.fonts.sizes.medium,
     fontFamily: theme.fonts.weights.Regular,
   },
+  errorMessage: {
+    marginTop: 4,
+    textAlign: "left",
+    alignSelf: "flex-start",
+    color: theme.colors.red_light,
+    fontSize: theme.fonts.sizes.small,
+    fontFamily: theme.fonts.weights.Regular,
+  },
 });
