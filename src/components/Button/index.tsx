@@ -1,10 +1,12 @@
-import { PressableProps, TextStyle } from "react-native";
+import { Fragment } from "react";
+import { ActivityIndicator, PressableProps, TextStyle } from "react-native";
 import { useTheme } from "styled-components/native";
 
 import * as S from "./styles";
 
 type ButtonProps = PressableProps & {
   label: string;
+  isLoading?: boolean;
   bgColor?: S.BgColorType;
   Icon?: () => React.JSX.Element;
   labelStyle?: TextStyle & { color: S.BgColorType };
@@ -13,6 +15,8 @@ type ButtonProps = PressableProps & {
 export function Button({
   Icon,
   label,
+  disabled,
+  isLoading,
   labelStyle,
   bgColor = "blue_light",
   ...restButtonProps
@@ -21,23 +25,30 @@ export function Button({
 
   const labelStyleWidthColorDefaultAdded = {
     ...labelStyle,
-    color: labelStyle ? colors[labelStyle?.color] : colors.gray_7,
+    color: labelStyle?.color ? colors[labelStyle?.color] : colors.gray_7,
   };
 
   return (
     <S.ButtonComponent
+      disabled={disabled || isLoading}
       children={({ pressed }) => (
-        <>
-          {Icon && <Icon />}
-          <S.Label
-            style={{
-              ...labelStyleWidthColorDefaultAdded,
-              ...(pressed ? { opacity: 0.7 } : {}),
-            }}
-          >
-            {label}
-          </S.Label>
-        </>
+        <Fragment>
+          {isLoading ? (
+            <ActivityIndicator color={labelStyleWidthColorDefaultAdded.color} />
+          ) : (
+            <Fragment>
+              {Icon && <Icon />}
+              <S.Label
+                style={{
+                  ...labelStyleWidthColorDefaultAdded,
+                  ...(pressed ? { opacity: 0.7 } : {}),
+                }}
+              >
+                {label}
+              </S.Label>
+            </Fragment>
+          )}
+        </Fragment>
       )}
       bgColor={bgColor}
       {...restButtonProps}

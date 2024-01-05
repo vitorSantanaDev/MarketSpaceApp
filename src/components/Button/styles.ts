@@ -5,7 +5,7 @@ import styled, { css } from "styled-components/native";
 export type BgColorType = keyof typeof theme.colors;
 
 export const ButtonComponent = styled(Pressable)<{ bgColor: BgColorType }>`
-  ${({ theme, bgColor }) => css`
+  ${({ theme, bgColor, disabled }) => css`
     max-width: 100%;
     min-width: 100%;
     align-items: center;
@@ -16,6 +16,10 @@ export const ButtonComponent = styled(Pressable)<{ bgColor: BgColorType }>`
     flex-direction: row;
     gap: 10px;
     background-color: ${theme.colors[bgColor]};
+    ${disabled &&
+    css`
+      opacity: 0.7;
+    `}
   `}
 `;
 
