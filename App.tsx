@@ -7,9 +7,11 @@ import {
   Karla_400Regular,
 } from "@expo-google-fonts/karla";
 
-import { theme } from "@theme/index";
 import { Loading } from "@components/Loading";
+
+import { theme } from "@theme/index";
 import { Routes } from "@routes/index";
+import { AuthContextProvider } from "@contexts/Auth/AuthContext";
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Karla_400Regular, Karla_700Bold });
@@ -21,7 +23,9 @@ export default function App() {
         backgroundColor="transparent"
         barStyle="dark-content"
       />
-      {fontsLoaded ? <Routes /> : <Loading />}
+      <AuthContextProvider>
+        {fontsLoaded ? <Routes /> : <Loading />}
+      </AuthContextProvider>
     </ThemeProvider>
   );
 }
