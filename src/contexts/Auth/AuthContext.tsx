@@ -36,9 +36,12 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
       setLoadingUserData(true);
       const { data } = await api.post("/sessions", { ...payload });
 
-      if (data.user && data.token) {
+      if (data.user && data.token && data.refresh_token) {
         await saveUserOnStorage(data.user);
-        await saveAuthTokenOnStorage({ token: data.token });
+        await saveAuthTokenOnStorage({
+          token: data.token,
+          refresh_token: data.refresh_token,
+        });
         userAndTokenUpdate({ user: data.user, token: data.token });
         setUser(data.user);
       }
@@ -83,8 +86,12 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   }, []);
 
   useEffect(() => {
-    console.log("USER CADASTROU E LOGOU ==>", { user });
-  }, [user]);
+    const subscribe = api.registerInterceptTokenManager(signOut);
+
+    return () => {
+      subscribe();
+    };
+  }, [signOut]);
 
   return (
     <AuthContext.Provider value={{ user, loadingUserData, signIn, signOut }}>
