@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Alert, Text, View } from "react-native";
+import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useForm, Controller, set } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Button } from "@components/Button";
@@ -44,7 +44,7 @@ export function SignInScreen() {
 
       const message = isAppError
         ? error.message
-        : "Ocorreu um erro ao tentar criar sua conta. Tente novamente mais tarde.";
+        : "Ocorreu um erro ao tentar fazer login.";
 
       Alert.alert(message);
     } finally {
@@ -53,16 +53,14 @@ export function SignInScreen() {
   }
 
   return (
-    <ScreenWrapper scrollViewProps={{ bounces: false }}>
-      <View style={S.SignInScreenStylesSheet.container}>
-        <View style={S.SignInScreenStylesSheet.loginSection}>
-          <Logo />
-          <Text style={S.SignInScreenStylesSheet.subtitle}>
-            Seu espaço de compra e venda
-          </Text>
-          <Text style={S.SignInScreenStylesSheet.accessAcountSectionTitle}>
+    <ScreenWrapper scrollViewProps={{ scrollEnabled: false }}>
+      <S.Container>
+        <S.LoginSection>
+          <Logo style={{ alignSelf: "center" }} />
+          <S.Subtitle>Seu espaço de compra e venda</S.Subtitle>
+          <S.AccessAcountSectionTitle>
             Acesse sua conta
-          </Text>
+          </S.AccessAcountSectionTitle>
           <Controller
             name="email"
             control={control}
@@ -92,26 +90,25 @@ export function SignInScreen() {
             )}
           />
           <Button
+            isLoading={isLoading}
             onPress={handleSubmit(handleSignIn)}
             style={{ marginTop: 32 }}
             label="Entrar"
             labelStyle={{ color: "gray_7" }}
           />
-        </View>
-        <View style={S.SignInScreenStylesSheet.registerSection}>
-          <Text
-            style={[S.SignInScreenStylesSheet.subtitle, { marginBottom: 16 }]}
-          >
+        </S.LoginSection>
+        <S.RegisterSection>
+          <S.Subtitle style={{ marginBottom: 16, textAlign: "center" }}>
             Ainda não tem conta?
-          </Text>
+          </S.Subtitle>
           <Button
             bgColor="gray_5"
             label="Cadastre-se"
             labelStyle={{ color: "gray_2" }}
             onPress={() => navigation.navigate("SIGN_UP")}
           />
-        </View>
-      </View>
+        </S.RegisterSection>
+      </S.Container>
     </ScreenWrapper>
   );
 }

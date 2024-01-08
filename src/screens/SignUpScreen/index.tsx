@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Alert, Image, Pressable, Text, View } from "react-native";
+import { Alert, Pressable } from "react-native";
 import { useTheme } from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 import { PencilSimpleLine } from "phosphor-react-native";
@@ -141,40 +141,32 @@ export function SignUpScreen() {
   }
 
   return (
-    <ScreenWrapper scrollViewProps={{ bounces: false }}>
-      <View style={S.SignUpScreenStylesSheet.container}>
-        <View style={S.SignUpScreenStylesSheet.welcomeSection}>
+    <ScreenWrapper>
+      <S.Container>
+        <S.WelcomeSection>
           <Logo width={60} height={40} />
-          <Text style={S.SignUpScreenStylesSheet.welcomeTitle}>
-            Boas Vindas!
-          </Text>
-          <S.TextStyled>
+          <S.WelcomeTitle>Boas Vindas!</S.WelcomeTitle>
+          <S.Subtitle>
             Crie sua conta e use o espaço para comprar itens variados e vender
             seus produtos
-          </S.TextStyled>
-        </View>
-        <View style={S.SignUpScreenStylesSheet.registerForm}>
+          </S.Subtitle>
+        </S.WelcomeSection>
+        <S.RegisterForm>
           <Pressable
             onPress={handleUserPhotoSelect}
             style={{ position: "relative" }}
           >
             {!!userPhotoSelected && userPhotoSelected.uri ? (
-              <Image
-                style={S.SignUpScreenStylesSheet.userPhoto}
+              <S.UserPhoto
+                resizeMode="cover"
                 source={{ uri: userPhotoSelected.uri }}
               />
             ) : (
-              <Image
-                style={[
-                  S.SignUpScreenStylesSheet.userPhoto,
-                  { borderWidth: 0 },
-                ]}
-                source={Avatar}
-              />
+              <S.UserPhoto style={{ borderWidth: 0 }} source={Avatar} />
             )}
-            <View style={S.SignUpScreenStylesSheet.editIconWrapper}>
+            <S.EditIconWrapper>
               <PencilSimpleLine size={16} color={colors.gray_7} />
-            </View>
+            </S.EditIconWrapper>
           </Pressable>
           <Controller
             name="name"
@@ -248,24 +240,27 @@ export function SignUpScreen() {
               />
             )}
           />
-
-          <Button
-            isLoading={isLoading}
-            onPress={handleSubmit(handleSignUp)}
-            bgColor="gray_1"
-            label="Criar"
-          />
-        </View>
-        <View style={S.SignUpScreenStylesSheet.alreadyHaveAccount}>
-          <S.TextStyled>Já tem uma conta?</S.TextStyled>
-          <Button
-            bgColor="gray_5"
-            label="Ir para o login"
-            labelStyle={{ color: "gray_2" }}
-            onPress={() => navigation.goBack()}
-          />
-        </View>
-      </View>
+          <S.ButtonWrapper>
+            <Button
+              isLoading={isLoading}
+              onPress={handleSubmit(handleSignUp)}
+              bgColor="gray_1"
+              label="Criar"
+            />
+          </S.ButtonWrapper>
+        </S.RegisterForm>
+        <S.AlreadyHaveAccount>
+          <S.Subtitle>Já tem uma conta?</S.Subtitle>
+          <S.ButtonWrapper>
+            <Button
+              bgColor="gray_5"
+              label="Ir para o login"
+              labelStyle={{ color: "gray_2" }}
+              onPress={() => navigation.goBack()}
+            />
+          </S.ButtonWrapper>
+        </S.AlreadyHaveAccount>
+      </S.Container>
     </ScreenWrapper>
   );
 }

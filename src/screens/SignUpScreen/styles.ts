@@ -1,65 +1,69 @@
-import { theme } from "@theme/index";
-import { StyleSheet } from "react-native";
 import styled, { css } from "styled-components/native";
 
-export const SignUpScreenStylesSheet = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    paddingTop: 20,
-    paddingBottom: 48,
-    paddingHorizontal: 48,
-    backgroundColor: theme.colors.gray_6,
-  },
-  welcomeSection: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  welcomeTitle: {
-    fontSize: 20,
-    textAlign: "center",
-    color: theme.colors.gray_1,
-    fontFamily: theme.fonts.weights.Bold,
-    marginBottom: 8,
-    marginTop: 12,
-  },
-  registerForm: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 16,
-    marginBottom: 48,
-    marginTop: 32,
-  },
-  alreadyHaveAccount: {
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 16,
-  },
-  userPhoto: {
-    width: 88,
-    height: 88,
-    borderWidth: 2,
-    borderRadius: 88 / 2,
-    resizeMode: "cover",
-    borderColor: theme.colors.blue_light,
-  },
-  editIconWrapper: {
-    width: 40,
-    height: 40,
-    borderRadius: 40 / 2,
-    backgroundColor: theme.colors.blue_light,
-    justifyContent: "center",
-    alignItems: "center",
-    position: "absolute",
-    bottom: 0,
-    right: 0,
-  },
-});
+export const Container = styled.View`
+  flex: 1;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-bottom: 48px;
+  padding-left: 48px;
+  padding-right: 48px;
+  background-color: ${({ theme }) => theme.colors.gray_6};
+`;
 
-export const TextStyled = styled.Text`
+export const WelcomeSection = styled.View`
+  align-items: center;
+  justify-content: center;
+`;
+
+export const WelcomeTitle = styled.Text`
+  ${({ theme }) => css`
+    font-size: 20px;
+    text-align: center;
+    color: ${theme.colors.gray_1};
+    font-family: ${theme.fonts.weights.Bold};
+    margin-bottom: 8px;
+    margin-top: 12px;
+  `}
+`;
+
+export const RegisterForm = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 48px;
+  margin-top: 32px;
+`;
+
+export const AlreadyHaveAccount = styled.View`
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+`;
+
+export const UserPhoto = styled.Image`
+  width: 88px;
+  height: 88px;
+  border-width: 2px;
+  border-radius: ${88 / 2}px;
+  border-color: ${({ theme }) => theme.colors.blue_light};
+`;
+
+export const EditIconWrapper = styled.View`
+  width: 40px;
+  height: 40px;
+  border-radius: ${40 / 2}px;
+  background-color: ${({ theme }) => theme.colors.blue_light};
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+`;
+
+export const Subtitle = styled.Text`
   ${({ theme }) => css`
     text-align: center;
     max-width: 279px;
@@ -67,4 +71,8 @@ export const TextStyled = styled.Text`
     color: ${theme.colors.gray_2};
     font-family: ${theme.fonts.weights.Regular};
   `}
+`;
+
+export const ButtonWrapper = styled.View`
+  flex-direction: row;
 `;
