@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Alert, Pressable } from "react-native";
+import { Pressable } from "react-native";
 import { useTheme } from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 import { PencilSimpleLine } from "phosphor-react-native";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";
+import Toast from "react-native-toast-message";
 
 import { Button } from "@components/Button";
 import { ScreenWrapper } from "@components/ScreenWrapper";
@@ -18,6 +19,7 @@ import Avatar from "@assets/Avatar.png";
 import { api } from "@services/api";
 import { AppError } from "@utils/app-error";
 import { signUpSchema } from "./signUpSchema";
+import { EToasterType } from "@components/ToastWrapper";
 import { useAuthContext } from "@contexts/Auth/AuthContext";
 
 import * as S from "./styles";
@@ -70,7 +72,11 @@ export function SignUpScreen() {
         const photoInfo = await FileSystem.getInfoAsync(file.uri);
 
         if (photoInfo.exists && photoInfo.size / 1024 / 1024 > 5) {
-          Alert.alert("Foto muito grande, selecione uma foto menor que 5MB");
+          Toast.show({
+            type: EToasterType.APP_INFO_ERROR,
+            text1: "Foto muito grande, selecione uma foto de até 5MB",
+          });
+
           return;
         }
 
@@ -85,7 +91,10 @@ export function SignUpScreen() {
         }
       }
     } catch (error) {
-      console.log({ error });
+      Toast.show({
+        type: EToasterType.APP_INFO_ERROR,
+        text1: "Ocorreu um erro ao tentar selecionar a foto, tente novamente",
+      });
     }
   }
 
@@ -93,7 +102,10 @@ export function SignUpScreen() {
     try {
       setIsLoading(true);
       if (!userPhotoSelected) {
-        Alert.alert("Selecione uma foto de perfil");
+        Toast.show({
+          type: EToasterType.APP_INFO_WARNING,
+          text1: "Selecione uma foto de perfil",
+        });
         return;
       }
 
@@ -126,6 +138,11 @@ export function SignUpScreen() {
         },
       });
 
+      Toast.show({
+        type: EToasterType.APP_INFO_SUCCESS,
+        text1: "Conta criada com sucesso!",
+      });
+
       await signIn({ email: data.email, password: data.password });
     } catch (error) {
       const isAppError = error instanceof AppError;
@@ -134,7 +151,7 @@ export function SignUpScreen() {
         ? error.message
         : "Ocorreu um erro ao tentar criar sua conta. Tente novamente mais tarde.";
 
-      Alert.alert(message);
+      Toast.show({ type: EToasterType.APP_INFO_ERROR, text1: message });
     } finally {
       setIsLoading(false);
     }

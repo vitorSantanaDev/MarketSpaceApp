@@ -3,6 +3,7 @@ import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Toast from "react-native-toast-message";
 
 import { Button } from "@components/Button";
 import { ScreenWrapper } from "@components/ScreenWrapper";
@@ -10,6 +11,7 @@ import { InputComponent } from "@components/InputComponent";
 
 import { AppError } from "@utils/app-error";
 import { signInSchema } from "./signInSchema";
+import { EToasterType } from "@components/ToastWrapper";
 import { useAuthContext } from "@contexts/Auth/AuthContext";
 import { AuthNavigatorRoutesProps } from "@routes/auth.routes";
 
@@ -46,7 +48,7 @@ export function SignInScreen() {
         ? error.message
         : "Ocorreu um erro ao tentar fazer login.";
 
-      Alert.alert(message);
+      Toast.show({ type: EToasterType.APP_INFO_ERROR, text1: message });
     } finally {
       setIsLoading(false);
     }

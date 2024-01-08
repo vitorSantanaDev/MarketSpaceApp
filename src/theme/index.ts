@@ -10,6 +10,8 @@ export const theme = {
     gray_5: "#D9D8DA",
     gray_6: "#EDECEE",
     gray_7: "#F7F7F8",
+    green: "#00B37E",
+    yellow: "#Fbdd00",
   },
   fonts: {
     sizes: {
