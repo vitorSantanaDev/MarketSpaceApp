@@ -1,17 +1,9 @@
-import {
-  View,
-  TextInput,
-  Pressable,
-  ViewStyle,
-  StyleProp,
-  TextInputProps,
-  Text,
-} from "react-native";
+import { View, Pressable, ViewStyle, TextInputProps } from "react-native";
 import { useState } from "react";
 import { Eye, EyeSlash } from "phosphor-react-native";
 import { useTheme } from "styled-components/native";
 
-import { InputComponentStylesSheet } from "./styles";
+import * as S from "./styles";
 
 type InputComponentProps = TextInputProps & {
   style?: ViewStyle;
@@ -51,14 +43,11 @@ export function InputComponent({
 
   return (
     <View style={style}>
-      <View
-        style={[InputComponentStylesSheet.inputContainer, inputFocusedStyle]}
-      >
-        <TextInput
+      <S.InputContainer style={inputFocusedStyle}>
+        <S.Input
           onBlur={handleBlur}
           onFocus={handleFocus}
           secureTextEntry={isPasswordVisible}
-          style={InputComponentStylesSheet.input}
           placeholderTextColor={colors.gray_4}
           {...restTextInputProps}
         />
@@ -74,12 +63,8 @@ export function InputComponent({
             )}
           </Pressable>
         )}
-      </View>
-      {!!errorMessage && (
-        <Text style={InputComponentStylesSheet.errorMessage}>
-          {errorMessage}
-        </Text>
-      )}
+      </S.InputContainer>
+      {!!errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
     </View>
   );
 }

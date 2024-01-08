@@ -6,15 +6,12 @@ export type BgColorType = keyof typeof theme.colors;
 
 export const ButtonComponent = styled(Pressable)<{ bgColor: BgColorType }>`
   ${({ theme, bgColor, disabled }) => css`
-    max-width: 100%;
-    min-width: 100%;
+    flex: 1;
     align-items: center;
     justify-content: center;
     padding-top: 12px;
     padding-bottom: 12px;
     border-radius: 6px;
-    flex-direction: row;
-    gap: 10px;
     background-color: ${theme.colors[bgColor]};
     ${disabled &&
     css`

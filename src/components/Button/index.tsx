@@ -1,11 +1,18 @@
 import { Fragment } from "react";
-import { ActivityIndicator, PressableProps, TextStyle } from "react-native";
+import {
+  ActivityIndicator,
+  PressableProps,
+  StyleProp,
+  TextStyle,
+  ViewStyle,
+} from "react-native";
 import { useTheme } from "styled-components/native";
 
 import * as S from "./styles";
 
 type ButtonProps = PressableProps & {
   label: string;
+  style?: StyleProp<ViewStyle>;
   isLoading?: boolean;
   bgColor?: S.BgColorType;
   Icon?: () => React.JSX.Element;
@@ -18,6 +25,7 @@ export function Button({
   disabled,
   isLoading,
   labelStyle,
+  style,
   bgColor = "blue_light",
   ...restButtonProps
 }: ButtonProps) {
@@ -52,6 +60,10 @@ export function Button({
       )}
       bgColor={bgColor}
       {...restButtonProps}
+      style={[
+        style,
+        Icon && { flexDirection: "row", gap: 8, alignItems: "center" },
+      ]}
     />
   );
 }

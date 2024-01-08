@@ -23,10 +23,10 @@ type IScreenWrapperProps = {
 const ScreenWrapper = React.forwardRef(function ScreenWrapperComponent(
   {
     children,
-    backgroundColor = "gray_7",
+    scrollViewProps,
     disableScrollView,
     safeAreaViewProps,
-    scrollViewProps,
+    backgroundColor = "gray_7",
   }: IScreenWrapperProps,
   ref: Ref<ScrollView>
 ) {
