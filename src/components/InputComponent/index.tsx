@@ -42,8 +42,8 @@ export function InputComponent({
       : {};
 
   return (
-    <View style={style}>
-      <S.InputContainer style={inputFocusedStyle}>
+    <View>
+      <S.InputContainer style={[style, inputFocusedStyle]}>
         <S.Input
           onBlur={handleBlur}
           onFocus={handleFocus}
