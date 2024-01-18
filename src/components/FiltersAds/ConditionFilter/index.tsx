@@ -1,20 +1,19 @@
 import { PressableProps } from "react-native";
-
+import { useTheme } from "styled-components/native";
 import { XCircle } from "phosphor-react-native";
 
 import * as S from "./styles";
-import { useTheme } from "styled-components/native";
 
-type ConditionTagProps = PressableProps & {
+type ConditionFilterProps = PressableProps & {
   label: string;
   isSelected: boolean;
 };
 
-export function ConditionTag({
+export function ConditionFilter({
   label,
   isSelected,
   ...restPressableProps
-}: ConditionTagProps) {
+}: ConditionFilterProps) {
   const { colors } = useTheme();
 
   return (

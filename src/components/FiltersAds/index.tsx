@@ -1,23 +1,24 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Modal, Pressable, View } from "react-native";
 import { useTheme } from "styled-components/native";
 import { MagnifyingGlass, Sliders, X } from "phosphor-react-native";
 
 import { Button } from "@components/Button";
 import { Checkbox } from "@components/Checkbox";
-import { ConditionTag } from "@components/ConditionTag";
 import { InputComponent } from "@components/InputComponent";
 import { SwitchComponent } from "@components/SwitchComponent";
+import { ConditionFilter } from "./ConditionFilter";
 
 import { AdsFiltersDTO } from "./interfaces";
 
-import * as S from "./styles";
 import {
   EAcceptedPaymentMethods,
   EAcceptedPaymentMethodsValues,
   EConditions,
   EConditionsValues,
 } from "./enums";
+
+import * as S from "./styles";
 
 type FiltersAdsProps = {
   search: string;
@@ -157,7 +158,7 @@ export function FiltersAds({
     return (
       <S.ConditionTagsContainer>
         {conditions.map((item) => (
-          <ConditionTag
+          <ConditionFilter
             key={item.key}
             label={item.value}
             isSelected={thisConditionIsChecked({
