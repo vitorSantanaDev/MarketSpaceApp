@@ -36,6 +36,9 @@
 			],
 			"@theme/*": [
 				"./src/theme/*"
+			],
+			"@enums/*": [
+				"./src/enums/*"
 			]
 		}
 	}
