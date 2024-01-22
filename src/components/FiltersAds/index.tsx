@@ -5,17 +5,15 @@ import { MagnifyingGlass, Sliders, X } from "phosphor-react-native";
 
 import { Button } from "@components/Button";
 import { Checkbox } from "@components/Checkbox";
+import { ConditionFilter } from "./ConditionFilter";
 import { InputComponent } from "@components/InputComponent";
 import { SwitchComponent } from "@components/SwitchComponent";
-import { ConditionFilter } from "./ConditionFilter";
 
 import { AdsFiltersDTO } from "./interfaces";
-
+import { EConditions, EConditionsValues } from "@enums/ad.enums";
 import {
   EAcceptedPaymentMethods,
   EAcceptedPaymentMethodsValues,
-  EConditions,
-  EConditionsValues,
 } from "./enums";
 
 import * as S from "./styles";
